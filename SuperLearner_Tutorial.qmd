@@ -92,7 +92,6 @@ The key theoretical result (van der Laan et al., 2007) is that Super Learner per
 **What this means for epidemiologists.** Rather than selecting a single "best" model, SL combines several into a weighted ensemble that can beat any one candidate, which matters when the true data-generating mechanism is unknown.
 :::
 
-<!-- ADD: formalización matemática del statistical learning framework -->
 ## Statistical learning framework
 
 In clinical studies, a vector of covariates $W_i$ and an outcome $Y_i$ are
@@ -125,9 +124,10 @@ $$
 R(\psi)=E[L(Y,\psi(W))].
 $$
 
-where the expectation is taken under the true distribution $P_0$. 
+where the expectation is taken under the true distribution $P_0$.
 
-The optimal prediction rule, with respect to the specified loss function, is defined as the rule that minimizes the expected risk,
+The optimal prediction rule, with respect to the specified loss function, is
+defined as the rule that minimizes the expected risk,
 
 $$
 \psi_0=\arg\min_{\psi}R(\psi).
@@ -148,9 +148,15 @@ algorithms and determine their combination within the ensemble.
 
 ### Super Learner formulation
 
-For each fold $v = 1, \ldots, V$, let $V(v)$ denote the validation set and $T(v)$ its complementary training set. Each candidate algorithm $\mathcal A_k$ is fitted on $T(v)$ and generates predictions for the observations in $V(v)$. Because these predictions are obtained from models that were not fitted using the corresponding validation observations, they constitute cross-validated, or out-of-fold, predictions.
+For each fold $v = 1, \ldots, V$, let $V(v)$ denote the validation set and
+$T(v)$ its complementary training set. Each candidate algorithm $\mathcal A_k$
+is fitted on $T(v)$ and generates predictions for the observations in
+$V(v)$. Because these predictions are obtained from models that were not
+fitted using the corresponding validation observations, they constitute
+cross-validated, or out-of-fold, predictions.
 
-The predictions obtained for the $K$ candidate algorithms are collected in an $n \times K$ matrix $Z$,
+The predictions obtained for the $K$ candidate algorithms are collected in an
+$n \times K$ matrix $Z$,
 
 $$
 Z=(Z_1,\ldots,Z_K),
@@ -158,14 +164,19 @@ $$
 
 where $Z_k$ contains the cross-validated predictions from algorithm $\mathcal A_k$.
 
-Let $\alpha=(\alpha_1,\ldots,\alpha_K)$ denote the vector of weights assigned to the candidate algorithms. The meta-learner selects the weights that minimize the cross-validated risk,
+Let $\alpha=(\alpha_1,\ldots,\alpha_K)$ denote the vector of weights assigned
+to the candidate algorithms. The meta-learner selects the weights that minimize
+the cross-validated risk,
 
 $$
 \widehat{\alpha}
 =
 \arg\min_{\alpha}R_{CV}(\alpha).
 $$
-where $R_{CV}(\alpha)$ denotes the cross-validated risk of the weighted combination under the specified performance criterion. The specific form of this criterion depends on the meta-learning procedure used to estimate the ensemble weights.
+where $R_{CV}(\alpha)$ denotes the cross-validated risk of the weighted
+combination under the specified performance criterion. The specific form of
+this criterion depends on the meta-learning procedure used to estimate the
+ensemble weights.
 For the standard convex combination, the weights satisfy
 
 $$
@@ -174,7 +185,9 @@ $$
 \sum_{k=1}^{K}\alpha_k=1.
 $$
 
-Once the weights have been estimated, each candidate algorithm is refitted using the full sample. For a new set of covariate values $w$, the final Super Learner prediction is
+Once the weights have been estimated, each candidate algorithm is refitted
+using the full sample. For a new set of covariate values $w$, the final Super
+Learner prediction is
 
 $$
 \widehat{\psi}_{SL}(w)
@@ -185,13 +198,16 @@ $$
 
 ## Theoretical guarantee of Super Learner
 
-The main theoretical guarantee of Super Learner is based on an oracle-type result. In this setting, the oracle corresponds to the combination that achieves the lowest risk within the considered family of combinations. As described above, Super Learner uses cross-validation to learn the combination of the candidate algorithms; the oracle-type result establishes that its performance asymptotically approaches that of this reference.
+The main theoretical guarantee of Super Learner is based on an oracle-type
+result. In this setting, the oracle corresponds to the combination that
+achieves the lowest risk within the considered family of combinations. As
+described above, Super Learner uses cross-validation to learn the combination
+of the candidate algorithms; the oracle-type result establishes that its
+performance asymptotically approaches that of this reference.
 
 This guarantee is asymptotic and is expressed in terms of the risk associated with the specified loss function. Therefore, it does not imply that Super Learner must outperform every candidate algorithm in each finite sample.
 
 ## Why Super Learner for Epi / Biostatistics?
-
-<!-- ADD: brief introduction to the practical motivation table -->
 
 The following table summarizes several practical motivations for using Super Learner in biostatistical and epidemiological applications.
 
