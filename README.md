@@ -76,4 +76,12 @@ If you use this tutorial in your work, please cite:
 }
 ```
 
-Last updated: August 2026
+Last updated: October 2026
+
+## Recent updates (October 2026)
+
+- **Dose-response output box**: Added `routputboxref` environment in the main tutorial LaTeX file (`main.tex`) to display key results (maximum risk and dose at maximum risk) from the dose-response analysis, following the document's consistent R output box pattern.
+
+- **Dose-response plot**: Generated `image/dose-response-curve.png` showing the Super Learner marginal dose-response curve plotting predicted probability of disease against exposure dose $A$.
+
+- **Caret reference**: The `caret` package reference (@manual{Kuhn2023caret}) is properly maintained in `references.bib` and cited throughout the tutorial for model preprocessing and comparison with Super Learner ensembles.
