@@ -1,5 +1,8 @@
 # SuperLearner Tutorial for Epidemiologists and Biostatisticians
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23218168.svg)](https://doi.org/10.5281/zenodo.23218168)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+
 A hands-on tutorial on Super Learner, the cross-validated ensemble machine learning method by van der Laan, Polley and Hubbard (2007), written for epidemiologists, biostatisticians, and clinical researchers who want to move beyond single-model fitting.
 
 The tutorial starts with a single penalised regression and builds up to a full 18-learner clinical prediction model with external validation, calibration plots, and a practical bridge to causal inference (TMLE).
