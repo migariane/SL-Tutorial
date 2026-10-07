@@ -1185,7 +1185,7 @@ cat("Test AUC:", round(as.numeric(pROC::auc(roc_test)), 4), "\n")
 cat("95% CI :", round(as.numeric(pROC::ci.auc(roc_test)), 4), "\n")
 
 plot(roc_test,
-     main = "Super Learner on the 20% held-out test set",
+     main = "SL on the 30% held-out test set",
      print.auc = TRUE, print.auc.y = 0.4,
      col = "#2ECC71", lwd = 3)
 abline(a = 0, b = 1, lty = 2, col = "gray50")
