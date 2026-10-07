@@ -1127,11 +1127,11 @@ full_library <- c(sl_library, rf_learners$names, xgb_learners$names)
 cat("Total number of candidate learners:", length(full_library), "\n")
 ```
 
-**What you see.** The `cat()` line prints 18, so you can confirm the grid expanded as expected. The block itself runs quickly because the cross-validation is deferred to the next chunk.
+**What you see.** The `cat()` line prints 20, so you can confirm the grid expanded as expected. The block itself runs quickly because the cross-validation is deferred to the next chunk.
 
 ## External CV of the full library
 
-**Why and how.** This is the single most expensive call in the document: 18 learners, 10 folds, log-likelihood optimisation, all on 700 training rows in parallel. The `cvControl = list(V = 10, stratifyCV = TRUE)` keeps the rare event proportion constant in each fold; without it you risk folds with zero events, which breaks some learners and inflates variance.
+**Why and how.** This is the single most expensive call in the document: 20 learners, 10 folds, log-likelihood optimisation, all on 700 training rows in parallel. The `cvControl = list(V = 10, stratifyCV = TRUE)` keeps the rare event proportion constant in each fold; without it you risk folds with zero events, which breaks some learners and inflates variance.
 
 ```{r clinical-sl-fit}
 set.seed(42, "L'Ecuyer-CMRG")
@@ -1185,13 +1185,13 @@ cat("Test AUC:", round(as.numeric(pROC::auc(roc_test)), 4), "\n")
 cat("95% CI :", round(as.numeric(pROC::ci.auc(roc_test)), 4), "\n")
 
 plot(roc_test,
-     main = "Super Learner on the 20% held-out test set",
+     main = "SL on the 30% held-out test set",
      print.auc = TRUE, print.auc.y = 0.4,
      col = "#2ECC71", lwd = 3)
 abline(a = 0, b = 1, lty = 2, col = "gray50")
 ```
 
-**What you see.** The printed AUC on the held-out 30% is 0.784 (95% CI 0.72 to 0.85), a discriminative but imperfect model, which is the honest outcome for a 13% event rate with nine covariates. The ROC curve climbs above the diagonal, and the printed confidence interval makes the uncertainty explicit; a single AUC point without an interval would be a misleading summary.
+**What you see.** The printed AUC on the held-out 30% is 0.727 (95% CI 0.652 to 0.801), a discriminative but imperfect model, which is the honest outcome for a 13% event rate with nine covariates. The ROC curve climbs above the diagonal, and the printed confidence interval makes the uncertainty explicit; a single AUC point without an interval would be a misleading summary.
 
 ```{r clinical-calibration, fig.cap="Calibration plot: predicted vs observed risk."}
 cal_df <- data.frame(predicted = as.vector(pred_clinical$pred),
